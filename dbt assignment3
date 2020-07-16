@@ -1,0 +1,8 @@
+Q.1)Does ANSI recognize the data type DATE?
+ANS : ANSI DATE format - YYYY-MM-DD
+       COMMAND - sday date,
+	   
+	   
+Q.2)Which subdivision of SQL is used to insert values in tables?
+ANS : To insert data into table we can use normal "insert" command.
+subdivision is used to insert values in tables is DML(Data Manipulation Language).
