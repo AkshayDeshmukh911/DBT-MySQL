@@ -1,0 +1,117 @@
+Q.1) Display all the supplier names with the initial letter capital.
+
+ select concat(ucase(left(sname,1)),lcase(substring(sname,2))) 'sname'from s;
++--------+
+| sname  |
++--------+
+| Akshay |
+| Amit   |
+| Akash  |
+| Sumit  |
++--------+
+
+Q.2) Display all the suppliers name in upper case.
+
+select upper(sname) from s;
++--------------+
+| upper(sname) |
++--------------+
+| AKSHAY       |
+| AMIT         |
+| AKASH        |
+| SUMIT        |
++--------------+
+
+Q.3) Display all the suppliers name in lower case.
+
+mysql> select lower(sname) from s;
++--------------+
+| lower(sname) |
++--------------+
+| akshay       |
+| amit         |
+| akash        |
+| sumit        |
++--------------+
+
+Q.4) Display all the supplier names padded to 25 characters, with space on the left.
+
+select lpad(sname,25,' ') 'sname' from s;
++---------------------------+
+| sname                     |
++---------------------------+
+|                    akshay |
+|                      amit |
+|                     akash |
+|                     sumit |
++---------------------------+
+
+Q.5) Display all the supplier names(with 'la' replaced by 'ro').
+
+
+insert into s
+values('s6','bela','50','paris');
+
+select replace(sname,'la','ro')from s;
++--------------------------+
+| replace(sname,'la','ro') |
++--------------------------+
+| akshay                   |
+| amit                     |
+| akash                    |
+| sumit                    |
+| block                    |
+| bero                     |
++--------------------------+
+
+
+Q.6) Implement the above command such that 'l' is replaced with 'r' and 'a' is replaced with 'o'.
+
+select replace(replace(sname,'l','r'),'a','o')from s;
++-----------------------------------------+
+| replace(replace(sname,'l','r'),'a','o') |
++-----------------------------------------+
+| okshoy                                  |
+| omit                                    |
+| okosh                                   |
+| sumit                                   |
+| brock                                   |
++-----------------------------------------+
+
+Q.7) Display the supplier names and the length of the names.
+
+select sname,length(sname)from s; 
++--------+---------------+
+| sname  | length(sname) |
++--------+---------------+
+| akshay |             6 |
+| amit   |             4 |
+| akash  |             5 |
+| sumit  |             5 |
++--------+---------------+
+
+Q.8) Use the soundex function to search for a supplier by the name of 'BLOCK'.
+
+insert into s
+values('s5','block','50','paris');
+
+select *from s
+where soundex(sname)=soundex('akaaash');
++------+--------+--------+--------+
+| S#   | sname  | status | city   |
++------+--------+--------+--------+
+| s1   | akshay | 10     | paris  |
+| s3   | akash  | 30     | london |
++------+--------+--------+--------+
+
+Q.9) Display the supplier name and the status(as ten,twenty,thirty,etc.).
+
+Q.10)Display the current day(e.g. Thursday). 
+
+select dayname('2020-07-20');
++-----------------------+
+| dayname('2020-07-20') |
++-----------------------+
+| Monday                |
++-----------------------+
+
