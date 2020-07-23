@@ -1,0 +1,37 @@
+Q.1) Write a query that uses a subquery to obtain all orders for the customer named cisneros. assum you do not know his customer number(cnum).
+
+select onum 'All orders',cnum from orders 
+where cnum = (select cnum from customers
+              where cname = 'cisneros');
++------------+------+
+| All orders | cnum |
++------------+------+
+|       3002 | 2007 |
++------------+------+
+
+Q.2) Write a query that produces the names and ratings of all customers who have above-average orders.
+
+select cname,rating from customers 
+where cnum in
+     (select cnum from orders
+      where amt>
+           (select avg(amt) from orders));
++---------+--------+
+| cname   | rating |
++---------+--------+
+| Liu     |    200 |
+| Clemens |    100 |
++---------+--------+
+
+Q.3) Write a query that selects the total amount in orders for each salesperson for whom this total is grater than the amount of 
+the largest order in the table.
+
+select sum(amt) from orders
+group by snum
+having sum(amt)>
+   (select max(amt) from orders);
++----------+
+| sum(amt) |
++----------+
+| 15382.07 |
++----------+
