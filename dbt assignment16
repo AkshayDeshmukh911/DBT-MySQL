@@ -1,0 +1,52 @@
+Q.1) Write a command that will enable a user to pull orders grouped by date out of the orders table quickly.
+
+create index d_order on orders(odate);
+mysql> show indexes from orders;
++--------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table  | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++--------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| orders |          1 | d_order  |            1 | Odate       | A         |           4 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
++--------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+
+Q.2) If the orders table has already been created,how can you force the onum fild to be unique (assume all current values are unique).
+
+alter table orders add unique(onum);
+
+desc orders;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| Onum  | int        | YES  | UNI | NULL    |       |
+| Amt   | float(7,2) | YES  |     | NULL    |       |
+| Odate | date       | YES  | MUL | NULL    |       |
+| Cnum  | int        | YES  |     | NULL    |       |
+| Snum  | int        | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+
+Q.3) Create an index that would permit each salesperson to retrive his or her orders grouped by data quickly.
+
+create index i_date on orders(odate);
+
+show indexes from orders;
++--------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table  | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++--------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| orders |          0 | Onum     |            1 | Onum        | A         |           9 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
+| orders |          1 | d_order  |            1 | Odate       | A         |           4 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
+| orders |          1 | i_date   |            1 | Odate       | A         |           4 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
++--------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+
+Q.4) Let us assume that each saleperson is to have only one customer of a given rating,and that this is currently the case.Enter a command that enforces it.
+
+alter table customers modify rating primary key;
+
+desc customers;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Cnum   | int         | NO   | PRI | NULL    |       |
+| Cname  | varchar(10) | NO   |     | NULL    |       |
+| City   | varchar(10) | YES  |     | NULL    |       |
+| Rating | int         | YES  |     | NULL    |       |
+| snum   | int         | NO   | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
