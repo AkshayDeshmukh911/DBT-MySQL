@@ -1,0 +1,157 @@
+Q.1) Display the supplier name and quentity sold.
+
+select sname,qty from s,spj
+where s.`s#`=spj.`s#`;
++--------+------+
+| sname  | qty  |
++--------+------+
+| akshay |  200 |
+| amit   |  300 |
+| amit   |  500 |
+| akash  |  230 |
++--------+------+
+
+Q.2) Display the part name and quantity sold.
+
+select pname,qty from p,spj
+where p.`p#`=spj.`p#`;
++-----------+------+
+| pname     | qty  |
++-----------+------+
+| gear      |  200 |
+| cam_shaft |  300 |
+| chain     |  230 |
+| gear      |  500 |
++-----------+------+
+
+Q.3) Display the Project name and quantity sold.
+
+select jname,qty from j,spj
+where j.`j#`=spj.`j#`;
++-------+------+
+| jname | qty  |
++-------+------+
+| xxx   |  200 |
+| xxx   |  500 |
+| yyy   |  300 |
+| zzz   |  230 |
++-------+------+
+
+Q.4) Display the supplier name,part name,project name and quantity sold.
+
+select sname,pname,jname,qty from s,p,j,spj
+where s.city=p.city and s.city=j.city and s.`s#`=spj.`s#`;
++--------+-----------+--------+
+| sname  | pname     | jname  |
++--------+-----------+--------+
+| akash  | cam_shaft | xxx    |
+| amit   | chain     | yyy    |
+| akshay | gear      | zzz    |
+| akshay | spark     | zzz    |
+| sumit  | gear      | zzz    |
+| sumit  | spark     | zzz    |
+| block  | gear      | zzz    |
+| block  | spark     | zzz    |
+| bela   | gear      | zzz    |
+| bela   | spark     | zzz    |
+| amit   | chain     | amina  |
+| amit   | chain     | avni   |
+| amit   | chain     | avnnni |
++--------+-----------+--------+
+
+Q.5) Display the supplier name,supplying parts to project in the same city.
+
+select sname ,pname,jname,city from s,p,j
+where s.city=p.city and s.city=j.city
+group by city;
+
+Q.6) Display the part name that is 'red' is color ,and the quantity sold.
+
+select pname,qty from p
+join spj using(`p#`)
+where color='red';
+
+Q.7) Display all the quantity sold by suppliers with the status=20.
+
+select qty,status from s,spj
+where status=20;
++------+--------+
+| qty  | status |
++------+--------+
+|  200 | 20     |
+|  300 | 20     |
+|  230 | 20     |
+|  500 | 20     |
++------+--------+
+
+Q.8) Display all the parts and quantity with a weight>14.
+
+select pname,qty from p,spj
+where weight>14;
++-----------+------+
+| pname     | qty  |
++-----------+------+
+| cam_shaft |  200 |
+| cam_shaft |  300 |
+| cam_shaft |  230 |
+| cam_shaft |  500 |
++-----------+------+
+
+Q.9) Display all the project names and city ,which has bought more than 500 parts.
+
+select jname,city from j
+join spj using(`j#`)
+where qty>500;
++-------+--------+
+| jname | city   |
++-------+--------+
+| zzz   | paris  |
+| amina | athens |
+| avni  | athens |
++-------+--------+
+
+Q.10) Display all the parts names and quantity sold that have a weight less than 15.
+
+
+select pname,qty from p,spj
+where weignt<15;
++-----------+------+
+| pname     | qty  |
++-----------+------+
+| gear      |  200 |
+| cam_shaft |  200 |
+| chain     |  200 |
+| spark     |  200 |
+| gear      |  300 |
+| cam_shaft |  300 |
+| chain     |  300 |
+| spark     |  300 |
+| gear      |  230 |
+| cam_shaft |  230 |
+| chain     |  230 |
+| spark     |  230 |
+| gear      |  500 |
+| cam_shaft |  500 |
+| chain     |  500 |
+| spark     |  500 |
+| gear      |  600 |
+| cam_shaft |  600 |
+| chain     |  600 |
+| spark     |  600 |
+| gear      |  800 |
+| cam_shaft |  800 |
+| chain     |  800 |
+| spark     |  800 |
++-----------+------+
+
+Q.11) Display all the employee names and the name of their managers.
+
+select empname,depthead from semp
+join sdept using(deptno);
++---------+----------+
+| empname | depthead |
++---------+----------+
+| SUNIL   | NULL     |
+| HIREN   | NULL     |
+| ALI     | 1        |
++---------+----------+
