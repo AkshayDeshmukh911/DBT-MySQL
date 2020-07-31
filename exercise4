@@ -1,0 +1,28 @@
+Q.1) Display the minimum status in the supplier table.
+
+select min(status) from s;
++-------------+
+| min(status) |
++-------------+
+| 10          |
++-------------+
+
+Q.2) Display the maximum weight in the parts table.
+
+select max(weignt) from p;
++-------------+
+| max(weignt) |
++-------------+
+| 2kg         |
++-------------+
+
+Q.3) Display average weight of the parts.
+
+select avg(weignt) from p;
++-------------+
+| avg(weignt) |
++-------------+
+|          10 |
++-------------+
+
+Q.4) Display the total quantity sold for part 'p1'
